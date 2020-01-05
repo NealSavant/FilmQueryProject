@@ -53,22 +53,25 @@ public class FilmQueryApp {
 						throw new Exception();
 					else
 						break userEntry;
-				} catch (Exception e) { System.err.println("Choose a number 1, 2, or 3.");
+				} catch (Exception e) {
+					System.err.println("Choose a number 1, 2, or 3.");
 				}
-			}	
+			}
 			userChoiceMenu(choice, input);
+			if (choice == 3)
+				running = false;
 		}
 	}
 
 	private void userChoiceMenu(int choice, Scanner input) {
-		switch(choice) {
-		case 1: 
+		switch (choice) {
+		case 1:
 			System.out.print("\nEnter film id: ");
 			int id = input.nextInt();
 			Film filmByID = db.findFilmById(id);
-			if(filmByID == null) {
+			if (filmByID == null) {
 				System.err.println("\tFilm not found in archives.");
-			}else {
+			} else {
 				System.out.println(filmByID);
 			}
 			break;
@@ -76,13 +79,18 @@ public class FilmQueryApp {
 			System.out.println("\nEnter keyword: ");
 			String keyword = input.next();
 			List<Film> films = db.findFilmByKeyword(keyword);
-			System.out.println("\n\t Retrieved FIlms:" + "\n" + films);
+			System.out.println("\n\t Retrieved " +
+								db.getCounter() +
+								" Films:" +
+								"\n" +
+								films);
 			break;
 		case 3:
+			System.out.println("Goodbye.");
 			break;
-			
+
 		}
-			
+
 	}
 
 }

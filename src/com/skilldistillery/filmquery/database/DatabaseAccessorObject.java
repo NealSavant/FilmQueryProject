@@ -12,7 +12,7 @@ import com.skilldistillery.filmquery.entities.Actor;
 import com.skilldistillery.filmquery.entities.Film;
 
 public class DatabaseAccessorObject implements DatabaseAccessor {
-
+	private int counter;
 	private static final String URL = "jdbc:mysql://localhost:3306/sdvid?useSSL=false";
 
 	static {
@@ -21,6 +21,10 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
+	}
+	//for retrieving how many films are retrieved from db scan
+	public int getCounter() {
+		return this.counter;
 	}
 
 	@Override
@@ -59,17 +63,18 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 	// the title keyword
 	@Override
 	public List<Film> findFilmByKeyword(String keyword) {
+		counter = 0;
 		String keywordAppend = "%" +
 								keyword +
 								"%";
 		List<Film> films = new ArrayList();
-		int counter = 1;
-		String sql = "SELECT title, description, release_year, rating, language.name " +
+		String sql = "SELECT title, description, release_year, rating, language.name, film.id " +
 				"FROM film JOIN language ON film.language_id = language.id " +
-				"WHERE title LIKE ? ";
+				"WHERE title LIKE ? OR description LIKE ?";
 		try (Connection connection = DriverManager.getConnection(URL, "student", "student")) {
 			PreparedStatement s = connection.prepareStatement(sql);
 			s.setString(1, keywordAppend);
+			s.setString(2, keywordAppend);
 			ResultSet r = s.executeQuery();
 			while (r.next()) {
 				String title = r.getString(1);
@@ -77,7 +82,9 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 				short rYear = r.getShort(3);
 				String rating = r.getString(4);
 				String language = r.getString(5); //join clause for film.id -> language.name
-				films.add(new Film(title, desc, rYear, rating, language));
+				List<Actor> actors = findActorsByFilmId(r.getInt(6));
+				films.add(new Film(title, desc, rYear, rating, language, actors));
+				counter++;
 			}
 			r.close();
 			s.close();
@@ -109,7 +116,7 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 		}
 		return actor;
 	}
-
+	//TODO: change method to not open new db connection for optimization
 	@Override
 	public List<Actor> findActorsByFilmId(int filmId) {
 		List<Actor> actors = new ArrayList();

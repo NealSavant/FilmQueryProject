@@ -17,12 +17,13 @@ public class Film {
 	private List<Actor> actors;
 	private String language;
 
-	public Film(String title, String description, short releaseYear, String rating, String language) {
+	public Film(String title, String description, short releaseYear, String rating, String language, List<Actor> actors) {
 		this.title = title;
 		this.description = description;
 		this.releaseYear = releaseYear;
 		this.rating = rating;
 		this.language = language;
+		this.actors = actors;
 	}
 	public Film(int id, String title, String description, short releaseYear, short langId, byte rentalDuration,
 			double rentalRate, short length, double replacementCost, String rating, String features, List<Actor> actors) {
@@ -213,9 +214,7 @@ public class Film {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("\nFilm [");
-		builder.append(" title= ");
-		builder.append(title);
+		builder.append("\n\n"+title);
 		builder.append(", description= ");
 		builder.append(description);
 		builder.append("\n\t releaseYear= ");
@@ -226,7 +225,6 @@ public class Film {
 		builder.append(language);
 		builder.append("\n\t actors= ");
 		builder.append(actors);
-		builder.append("]");
 		return builder.toString();
 	}
 
