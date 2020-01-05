@@ -15,7 +15,15 @@ public class Film {
 	private String rating;
 	private String features;
 	private List<Actor> actors;
+	private String language;
 
+	public Film(String title, String description, short releaseYear, String rating, String language) {
+		this.title = title;
+		this.description = description;
+		this.releaseYear = releaseYear;
+		this.rating = rating;
+		this.language = language;
+	}
 	public Film(int id, String title, String description, short releaseYear, short langId, byte rentalDuration,
 			double rentalRate, short length, double replacementCost, String rating, String features, List<Actor> actors) {
 		super();
@@ -205,29 +213,18 @@ public class Film {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Film [id=");
-		builder.append(id);
-		builder.append(", title=");
+		builder.append("\nFilm [");
+		builder.append(" title= ");
 		builder.append(title);
-		builder.append(", description=");
+		builder.append(", description= ");
 		builder.append(description);
-		builder.append(", releaseYear=");
+		builder.append("\n\t releaseYear= ");
 		builder.append(releaseYear);
-		builder.append(", langId=");
-		builder.append(langId);
-		builder.append(", rentalDuration=");
-		builder.append(rentalDuration);
-		builder.append(", rentalRate=");
-		builder.append(rentalRate);
-		builder.append(", length=");
-		builder.append(length);
-		builder.append(", replacementCost=");
-		builder.append(replacementCost);
 		builder.append(", rating=");
 		builder.append(rating);
-		builder.append(", features=");
-		builder.append(features);
-		builder.append("\n\t, actors=");
+		builder.append(", language= ");
+		builder.append(language);
+		builder.append("\n\t actors= ");
 		builder.append(actors);
 		builder.append("]");
 		return builder.toString();

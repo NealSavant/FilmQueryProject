@@ -44,7 +44,8 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 				String rating = r.getString(10);
 				String features = r.getString(11);
 				List<Actor> actors = findActorsByFilmId(filmId);
-				film = new Film(id, title, desc, rYear, langId, rDuration, rRate, length, rCost, rating, features, actors);
+				film = new Film(id, title, desc, rYear, langId, rDuration, rRate, length, rCost, rating, features,
+						actors);
 			}
 			r.close();
 			s.close();
@@ -52,6 +53,38 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 			e.printStackTrace();
 		}
 		return film;
+	}
+
+	// this method returns a list of movies titles and their description matching
+	// the title keyword
+	@Override
+	public List<Film> findFilmByKeyword(String keyword) {
+		String keywordAppend = "%" +
+								keyword +
+								"%";
+		List<Film> films = new ArrayList();
+		int counter = 1;
+		String sql = "SELECT title, description, release_year, rating, language.name " +
+				"FROM film JOIN language ON film.language_id = language.id " +
+				"WHERE title LIKE ? ";
+		try (Connection connection = DriverManager.getConnection(URL, "student", "student")) {
+			PreparedStatement s = connection.prepareStatement(sql);
+			s.setString(1, keywordAppend);
+			ResultSet r = s.executeQuery();
+			while (r.next()) {
+				String title = r.getString(1);
+				String desc = r.getString(2);
+				short rYear = r.getShort(3);
+				String rating = r.getString(4);
+				String language = r.getString(5); //join clause for film.id -> language.name
+				films.add(new Film(title, desc, rYear, rating, language));
+			}
+			r.close();
+			s.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return films;
 	}
 
 	@Override
