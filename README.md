@@ -40,11 +40,13 @@ Unix Terminal
 git
 
 
+## Demo 
+
+#Search for Film using its ID
+![Search Film by ID](<https://user-images.githubusercontent.com/55298338/71800878-819a2c80-3016-11ea-8dea-091963e427d7.png>)
 
 
+#Search for Film using a keyword
+![Search Film by Keyword](<https://user-images.githubusercontent.com/55298338/71801019-e5bcf080-3016-11ea-8e88-9d1526e50e82.png>)
 
-
-
-
-
-
+>>>>>>> fc2d7bef997d70f73862be426c993efbb6f2c23e
