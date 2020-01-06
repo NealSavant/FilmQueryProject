@@ -67,7 +67,7 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 		String keywordAppend = "%" +
 								keyword +
 								"%";
-		List<Film> films = new ArrayList();
+		List<Film> films = new ArrayList<>();
 		String sql = "SELECT title, description, release_year, rating, language.name, film.id " +
 				"FROM film JOIN language ON film.language_id = language.id " +
 				"WHERE title LIKE ? OR description LIKE ?";
@@ -119,7 +119,7 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 	//TODO: change method to not open new db connection for optimization
 	@Override
 	public List<Actor> findActorsByFilmId(int filmId) {
-		List<Actor> actors = new ArrayList();
+		List<Actor> actors = new ArrayList<>();
 		String sql = "SELECT actor.id, actor.first_name, actor.last_name " +
 						"FROM actor JOIN film_actor ON film_actor.actor_id =  actor.id " +
 						"JOIN film ON film.id = film_actor.film_id " +

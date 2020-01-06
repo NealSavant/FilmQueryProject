@@ -9,15 +9,23 @@ A console application representing a film rental company's database.  The user c
 
 ### Concepts
 
+	Prevent SQL Injection using PreparedStatement and bind variables.
+	
 	Java:
 		Interfaces
 		Object Encapsulation
-		
+		Return Types
+		Parameters
+		Method Override
+		ArrayList
 		
 	SQL:
 		SELECT
-		JOIN
+		JOIN ON
+		LIKE
+		? : bind variable
 		Pattern Matching
+		
 	JDBC:
 		Object-Relational Mapping
 		PreparedStatement
