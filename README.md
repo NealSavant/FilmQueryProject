@@ -48,5 +48,3 @@ git
 
 #Search for Film using a keyword
 ![Search Film by Keyword](<https://user-images.githubusercontent.com/55298338/71801019-e5bcf080-3016-11ea-8e88-9d1526e50e82.png>)
-
->>>>>>> fc2d7bef997d70f73862be426c993efbb6f2c23e
