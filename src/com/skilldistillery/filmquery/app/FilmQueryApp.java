@@ -38,6 +38,7 @@ public class FilmQueryApp {
 				System.out.println("\t3. Exit application");
 				try {
 					choice = input.nextInt();
+					input.nextLine();	//adjusts input buffer
 					if (choice < 1 || choice > 3)
 						throw new Exception();
 					else
@@ -53,7 +54,9 @@ public class FilmQueryApp {
 	}
 
 	private void userChoiceMenu(int choice, Scanner input) {
+
 		switch (choice) {
+
 		case 1:
 			System.out.print("\nEnter film id: ");
 			int id = input.nextInt();
@@ -64,9 +67,10 @@ public class FilmQueryApp {
 				System.out.println(filmByID);
 			}
 			break;
+
 		case 2:
 			System.out.println("\nEnter keyword: ");
-			String keyword = input.next();
+			String keyword = input.nextLine();
 			List<Film> films = db.findFilmByKeyword(keyword);
 			System.out.println("\n\t Retrieved " +
 								db.getCounter() +
@@ -83,3 +87,9 @@ public class FilmQueryApp {
 	}
 
 }
+
+
+
+
+
+

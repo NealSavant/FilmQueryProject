@@ -47,7 +47,7 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 				double rCost = r.getDouble(9);
 				String rating = r.getString(10);
 				String features = r.getString(11);
-				List<Actor> actors = findActorsByFilmId(filmId);
+				List<Actor> actors = findActorsByFilmId(filmId);	//not optimized
 				film = new Film(id, title, desc, rYear, langId, rDuration, rRate, length, rCost, rating, features,
 						actors);
 			}
@@ -82,7 +82,7 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 				short rYear = r.getShort(3);
 				String rating = r.getString(4);
 				String language = r.getString(5); //join clause for film.id -> language.name
-				List<Actor> actors = findActorsByFilmId(r.getInt(6));
+				List<Actor> actors = findActorsByFilmId(r.getInt(6));	//not optimized
 				films.add(new Film(title, desc, rYear, rating, language, actors));
 				counter++;
 			}
